@@ -1,2 +1,32 @@
-<h1>Admin::Items#new</h1>
-<p>Find me in app/views/admin/items/new.html.erb</p>
+<h2>商品新規登録</h2>
+
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @item, url: admin_items_path do |f| %>
+
+      <%= f.label :商品名 %>
+      <%= f.text_field :name %>
+      <br>
+      <%= f.label :商品説明 %>
+      <%= f.text_area :introduction %>
+      <br>
+      <%= f.label :ジャンル %>
+      <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--" %>
+      <br>
+      <%= f.label :税抜き価格 %>
+      <%= f.text_field :price %>
+      <br>
+      <%= f.label :販売ステータス %>
+      <%= f.select :is_active, [["販売中","false"],["販売不可","true"]], include_blank: "---選択してください-" %>
+      <br>
+  
+  <%= f.submit "新規登録" %>
+
+<% end %>
