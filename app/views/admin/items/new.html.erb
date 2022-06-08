@@ -11,6 +11,9 @@
 
 <%= form_with model: @item, url: admin_items_path do |f| %>
 
+      <%= f.label :商品画像 %>
+      <%= f.attachment_field :image %>
+      <br>
       <%= f.label :商品名 %>
       <%= f.text_field :name %>
       <br>
