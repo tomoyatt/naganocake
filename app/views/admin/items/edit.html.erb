@@ -1,2 +1,33 @@
-<h1>Admin::Items#edit</h1>
-<p>Find me in app/views/admin/items/edit.html.erb</p>
+<h2>商品編集</h2>
+
+<% if flash[:item_update_error] %>
+  <p id="item_update_error">
+    <%= flash[:item_update_error] %>
+  </p>
+<% end %>
+
+<%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
+
+      <%= f.label :商品画像 %>
+      <%= f.attachment_field :image %>
+      <br>
+      <%= f.label :商品名 %>
+      <%= f.text_field :name %>
+      <br>
+      <%= f.label :商品説明 %>
+      <%= f.text_area :introduction %>
+      <br>
+      <%= f.label :ジャンル %>
+      <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--" %>
+      <br>
+      <%= f.label :税抜き価格 %>
+      <%= f.text_field :price %>
+      <br>
+      <%= f.label :販売ステータス %>
+      <%= f.radio_button :is_active, true %> 販売中
+      <%= f.radio_button :is_active, false %> 販売停止中
+      <br>
+  
+  <%= f.submit "変更を保存" %>
+
+<% end %>
