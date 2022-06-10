@@ -15,14 +15,22 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
+  def edit
   #   super
-  # end
+  @customer = current_customer
+  end
 
   # PUT /resource
-  # def update
+  def update
   #   super
-  # end
+  @customer = current_customer
+    if @customer.update(customer_params)
+      redirect_to customers_my_page_path
+    else
+      flash[:customer_edit_error] = "項目は必ずご入力ください"
+      redirect_to customers_edit_path
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -59,4 +67,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  private
+  
+  def customer_params
+    params.require(:customer).permit(
+      :last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email
+      )
+  end
 end
