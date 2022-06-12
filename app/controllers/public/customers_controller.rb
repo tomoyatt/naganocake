@@ -21,6 +21,11 @@ class Public::CustomersController < ApplicationController
   end
   
   def withdraw
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: false)
+    reset_session
+    flash[:notice] = "退会しました"
+    redirect_to root_path
   end
   
   private
