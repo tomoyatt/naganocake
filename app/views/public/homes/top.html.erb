@@ -1,2 +1,24 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<table>
+  <tbody>
+    <tr>
+      <td>ジャンル検索</td>
+    </tr>
+    <% @genres.each do |genre| %>
+    <tr>
+      <td><%= genre.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+ようこそ、ながのCAKEへ！<br>
+このサイトは、ケーキ販売のECサイトです。<br>
+会員でない方も商品の閲覧はできますが、<br>
+購入には会員登録が必要です。
+</p>
+
+<h2>新着商品</h2>
+
+
+<%= link_to "全ての商品を見る", items_path %>
