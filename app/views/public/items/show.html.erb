@@ -13,7 +13,16 @@
       <td><%= @item.introduction %></td>
     </tr>
     <tr>
-      <td><%= (@item.price*1.1).floor.to_s(:delimiter, :unit => "￥") %> (税込み)</td>
+      <td>¥<%= (@item.price*1.1).floor.to_s(:delimited) %> (税込)</td>
     </tr>
   </tbody>
 </table>
+
+<%= form_with model: @cart_item, url: cart_items_path do |f| %>
+
+<%= f.hidden_field :name, :value => @item.name %>
+<%= f.select :amount, *[1..10], {:prompt => "個数選択"} %>
+
+<%= f.submit "カートに入れる" %>
+
+<% end %>
