@@ -52,11 +52,26 @@
         <td><%= (order_detail.item.price * 1.1).floor.to_s(:delimited) %></td>
         <td><%= order_detail.amount %></td>
         <td><%= ((order_detail.item.price * 1.1) * order_detail.amount).floor.to_s(:delimited) %></td>
-        <%= form_with model: order_detail, url: admin_order_detail_path, method: :patch do |f| %>
+        <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
           <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %></td>
           <td><%= f.submit "更新" %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
+</table>
+
+<table>
+  <tr>
+    <td>商品金額</td>
+    <td><%= @total_price.to_s(:delimited) %>円</td>
+  </tr>
+  <tr>
+    <td>送料</td>
+    <td><%= @order.shipping_cost %>円</td>
+  </tr>
+  <tr>
+    <td>請求金額合計</td>
+    <td><%= (@order.total_payment).to_s(:delimited) %>円</td>
+  </tr>
 </table>

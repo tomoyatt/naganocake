@@ -1,11 +1,19 @@
 class Admin::OrderDetailsController < ApplicationController
   
   def update
-    order = Order.find(params[:id])
     order_detail = OrderDetail.find(params[:id])
 		order_detail.update(order_detail_params)
-    binding.pry
-		redirect_to admin_order_path(order.id)
+		
+		case order_detail.making_status
+		 when "in_production"
+				order_detail.order.update(status: "in_production")
+		 when "production_complete"
+			if order_detail.order.order_details.all?{|order_detail| order_detail.making_status == "production_complete"}
+				order_detail.order.update(status: "shipping_preparation")
+			end
+		end
+		
+		redirect_to admin_order_path(order_detail.order.id)
   end
 
   
