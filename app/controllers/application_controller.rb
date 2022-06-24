@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
   def admin_url
     request.fullpath.include?("/admin")
   end
+  
+  def authenticate_customer
+    @customer = current_customer
+    if @customer == nil
+      redirect_to new_customer_session_path
+    end
+  end
 end
