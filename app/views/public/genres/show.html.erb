@@ -1,0 +1,9 @@
+<h2><%= "#{@genre.name}一覧(全#{@items.count}件)" %></h2>
+
+<% @items.each do |item| %>
+
+  <%= attachment_image_tag item, :image, :fill, 150, 150, fallback: 'no-image.jpg' %><br>
+  <%= link_to item.name, item_path(item) %><br>
+  ¥<%= (item.price*1.1).floor.to_s(:delimited) %><br>
+
+<% end %>
