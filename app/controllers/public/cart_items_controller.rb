@@ -16,6 +16,10 @@ class Public::CartItemsController < ApplicationController
   
   def index
     @cart_items = current_customer.cart_items
+    @total_price = 0
+    @cart_items.each do |cart_item|
+      @total_price += (cart_item.item.price * 1.1 * cart_item.amount).floor
+    end
   end
   
   def update
