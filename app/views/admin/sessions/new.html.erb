@@ -1,16 +1,36 @@
 <div class="container">
-  <h4>管理者ログイン</h4>
+  <div class="row mb-5">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-10">
+      <label class="h4 bg-light">管理者ログイン</label>
+    </div>
+  </div>
     <%= form_with model: @admin, url: admin_session_path do |f| %>
-      <div class="field">
-        <%= f.label :メールアドレス %><br>
+    <div class="row mb-3">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-2">
+        <%= f.label :メールアドレス %>
+      </div>
+      <div class="col-lg-7">
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
-    
-      <div class="field">
-        <%= f.label :パスワード %><br>
+    </div>
+    <div class="row mb-3">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-2">
+        <%= f.label :パスワード %>
+      </div>
+      <div class="col-lg-7">
         <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
-    
+    </div>
+    <div class="row mb-5">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-7">
+        <%= f.submit "ログイン", class: "btn btn-primary" %>
+      </div>
+    </div>
+
       <% if false %>
         <% if devise_mapping.rememberable? %>
           <div class="field">
@@ -19,10 +39,7 @@
           </div>
         <% end %>
       <% end %>
-      <br>
-      <div class="actions">
-        <%= f.submit "ログイン", class: "btn btn-primary" %>
-      </div>
+      
     <% end %>
     
     <%= render "admin/shared/links" %>
