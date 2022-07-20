@@ -1,29 +1,29 @@
 <div class="container">
   <label class="h4 bg-light">注文履歴詳細</label>
-  <div class="row">
+  <div class="row mb-2">
     <div class="col-lg-6">
       <table class="table table-borderless">
         <tr>
-          <td>購入者</td>
+          <th>購入者</th>
           <td><%= link_to (@order.customer.last_name + ' ' + @order.customer.first_name), admin_customer_path(@order.customer), class:"text-dark" %></td>
         </tr>
         <tr>
-          <td>注文日</td>
+          <th>注文日</th>
           <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
         </tr>
         <tr>
-          <td>配送先</td>
+          <th>配送先</th>
           <td>
           〒 <%= @order.postal_code %>　<%= @order.address %><br>
           <%= @order.name %>
           </td>
         </tr>
         <tr>
-          <td>支払方法</td>
+          <th>支払方法</th>
           <td><%= @order.payment_method_i18n %></td>
         </tr>
         <tr>
-          <td>注文ステータス</td>
+          <th>注文ステータス</th>
           <td>
             <%= form_with model: @order, url: admin_order_path(@order) do |f| %>
               <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
@@ -34,9 +34,7 @@
       </table>      
     </div>
   </div>
-
-  
-  <div class="row mt-3">
+  <div class="row mb-2">
     <div class="col-lg-8">
       <table class="table shadow-sm">
         <thead>
@@ -68,15 +66,15 @@
     <div class="col-lg-4 d-flex align-items-end mb-2">
       <table>
         <tr>
-          <td>商品金額</td>
+          <th>商品金額</th>
           <td><%= @total_price.to_s(:delimited) %>円</td>
         </tr>
         <tr>
-          <td>送料</td>
+          <th>送料</th>
           <td><%= @order.shipping_cost %>円</td>
         </tr>
         <tr>
-          <td>請求金額合計</td>
+          <th>請求金額合計</th>
           <td><%= (@order.total_payment).to_s(:delimited) %>円</td>
         </tr>
       </table>      
