@@ -10,6 +10,13 @@
       <h3><%= @item.name %></h3>
       <p><%= @item.introduction %></p>
       <label class="h4">¥<%= (@item.price*1.1).floor.to_s(:delimited) %> (税込)</label>
+      <div class="error_message">
+        <% if flash[:notice] %>
+          <p class="text-danger" id="notice">
+            <%= flash[:notice] %>
+          </p>
+        <% end %>
+      </div>
       <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
         <%= f.hidden_field :item_id, :value => @item.id %>
         <%= f.select :amount, *[1..10], {:prompt => "個数選択"}, class:"mr-3" %>

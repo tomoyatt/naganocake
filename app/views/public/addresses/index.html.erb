@@ -30,7 +30,8 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
+  <% if @addresses.present? %>
+  <div class="row mb-2">
     <div class="col-lg-8">
       <table class="table table-bordered">
         <thead>
@@ -57,5 +58,6 @@
       </table>
     </div>
   </div>
+  <% end %>
 </div>
 

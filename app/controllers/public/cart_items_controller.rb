@@ -7,7 +7,6 @@ class Public::CartItemsController < ApplicationController
     @cart_item.customer_id = current_customer.id
     if @cart_item.save
       redirect_to cart_items_path
-      flash[:notice] = "#{@cart_item.item.name}をカートに追加しました。"
     else
       redirect_back(fallback_location: items_path)
       flash[:notice] = "個数を選択してください。"
